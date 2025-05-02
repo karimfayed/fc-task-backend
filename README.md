@@ -2,6 +2,10 @@
 
 This is the backend service for the FC task project, built with NestJS.
 
+**IMPORTANT NOTE** 
+
+Sending out emails to users 30 mins before appointments was mocked by logging using the custom logger inside thr CRON job.
+
 ## 🚀 Getting Started
 
 ### 📦 Prerequisites
