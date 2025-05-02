@@ -1,0 +1,253 @@
+openapi: 3.0.0
+paths:
+  /:
+    get:
+      operationId: AppController_getHello
+      parameters: []
+      responses:
+        '200':
+          description: ''
+      tags:
+        - App
+  /auth/signup:
+    post:
+      operationId: AuthController_signUp
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SignupDto'
+      responses:
+        '201':
+          description: ''
+      tags: &ref_0
+        - Auth
+  /auth/login:
+    post:
+      operationId: AuthController_login
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginDto'
+      responses:
+        '201':
+          description: ''
+      tags: *ref_0
+  /auth/refresh:
+    post:
+      operationId: AuthController_refresh
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RefreshTokenDto'
+      responses:
+        '201':
+          description: ''
+      tags: *ref_0
+  /user/slot/available:
+    get:
+      operationId: UserController_getSlots
+      parameters:
+        - name: providerId
+          required: true
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+      tags: &ref_1
+        - User
+  /user/appointment:
+    post:
+      operationId: UserController_createAppoitment
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AppointmentDto'
+      responses:
+        '201':
+          description: ''
+      tags: *ref_1
+  /user/appointment/{appoitmentId}:
+    delete:
+      operationId: UserController_deleteAppoitment
+      parameters:
+        - name: slotId
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+      tags: *ref_1
+  /provider/slot:
+    get:
+      operationId: ProviderController_getSlots
+      parameters:
+        - name: isBookedOnly
+          required: true
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+      tags: &ref_2
+        - Provider
+    post:
+      operationId: ProviderController_createSlot
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SlotDto'
+      responses:
+        '201':
+          description: ''
+      tags: *ref_2
+  /provider/slot/{slotId}:
+    put:
+      operationId: ProviderController_updateSlot
+      parameters:
+        - name: slotId
+          required: true
+          in: path
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SlotDto'
+      responses:
+        '200':
+          description: ''
+      tags: *ref_2
+    delete:
+      operationId: ProviderController_deleteSlot
+      parameters:
+        - name: slotId
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ''
+      tags: *ref_2
+info:
+  title: Your API Title
+  description: API description
+  version: '1.0'
+  contact: {}
+tags: []
+servers: []
+components:
+  securitySchemes:
+    bearer:
+      scheme: bearer
+      bearerFormat: JWT
+      type: http
+  schemas:
+    SignupDto:
+      type: object
+      properties:
+        name:
+          type: string
+          example: John Doe
+          description: The full name of the user
+          minLength: 3
+        email:
+          type: string
+          example: john@example.com
+          description: The user’s email address
+        password:
+          type: string
+          example: Passw0rd!
+          description: >-
+            Password must be at least 8 characters long and contain a letter, a
+            number, and a special character
+          minLength: 8
+        role:
+          type: string
+          enum:
+            - user
+            - provider
+          example: user
+          description: User role — either user or provider
+      required:
+        - name
+        - email
+        - password
+        - role
+    LoginDto:
+      type: object
+      properties:
+        email:
+          type: string
+          example: user@example.com
+          description: The user’s email address
+        password:
+          type: string
+          example: P@ssw0rd!
+          description: The user’s password
+      required:
+        - email
+        - password
+    RefreshTokenDto:
+      type: object
+      properties:
+        refreshToken:
+          type: string
+          example: 8be0a1f4-1234-45b6-8e11-9a5cfa1ab1c8
+          description: Refresh token string issued during login
+      required:
+        - refreshToken
+    AppointmentDto:
+      type: object
+      properties:
+        slotId:
+          type: string
+          example: b7a8c7a3-5e12-4d7f-8d67-4f9a3e8c89f1
+          description: UUID of the slot being booked
+          format: uuid
+        status:
+          type: string
+          enum:
+            - booked
+            - cancelled
+            - completed
+          example: booked
+          description: Status of the appointment (optional, defaults to BOOKED)
+      required:
+        - slotId
+    SlotDto:
+      type: object
+      properties:
+        startTime:
+          type: string
+          example: '2025-06-01T10:00:00Z'
+          description: Start time of the slot in ISO 8601 format (UTC)
+        endTime:
+          type: string
+          example: '2025-06-01T10:30:00Z'
+          description: End time of the slot in ISO 8601 format (UTC)
+      required:
+        - startTime
+        - endTime
