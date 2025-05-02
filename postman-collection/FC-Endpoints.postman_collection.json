@@ -1,0 +1,401 @@
+{
+	"info": {
+		"_postman_id": "8cc71eb6-df0d-4993-ac5c-e0c116d39595",
+		"name": "FC-Endpoints",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "22241988"
+	},
+	"item": [
+		{
+			"name": "Provider",
+			"item": [
+				{
+					"name": "Create Slot",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxMTkwNmM0Yy1jMGNkLTRhODktYWIzNS03MTAyMjU2NTlmNjciLCJyb2xlIjoicHJvdmlkZXIiLCJpYXQiOjE3NDYxMzA5MTUsImV4cCI6MTc0NjEzMDk3NX0.sCVuycQv43zth19KiO_CaanBN3jkIBvN94E2ZeJ3nFI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"startTime\": \"2025-06-01T09:00:00Z\",\r\n  \"endTime\": \"2025-06-01T09:30:00Z\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/provider/slot",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"provider",
+								"slot"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Slot",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxMTkwNmM0Yy1jMGNkLTRhODktYWIzNS03MTAyMjU2NTlmNjciLCJyb2xlIjoicHJvdmlkZXIiLCJpYXQiOjE3NDYxMzMxNjMsImV4cCI6MTc0NjEzMzY2M30.yvAAgwTXybNC1q7-ZKSDhi98soth3stlWj2IYIs8RC8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"startTime\": \"2025-06-01T09:00:00Z\",\r\n  \"endTime\": \"2025-06-01T09:30:00Z\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/provider/slot/:slotId",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"provider",
+								"slot",
+								":slotId"
+							],
+							"variable": [
+								{
+									"key": "slotId",
+									"value": "82da2215-8ae7-4a18-96c5-0505563318fd"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Provider Slots",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxMTkwNmM0Yy1jMGNkLTRhODktYWIzNS03MTAyMjU2NTlmNjciLCJyb2xlIjoicHJvdmlkZXIiLCJpYXQiOjE3NDYxMzE0NDEsImV4cCI6MTc0NjEzMTk0MX0.CvsD45CC5FMJ4oykldzEkphr8MRWprnXaDWIspAh4RI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/provider/slot?isBookedOnly=false",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"provider",
+								"slot"
+							],
+							"query": [
+								{
+									"key": "isBookedOnly",
+									"value": "false"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Slot",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxMTkwNmM0Yy1jMGNkLTRhODktYWIzNS03MTAyMjU2NTlmNjciLCJyb2xlIjoicHJvdmlkZXIiLCJpYXQiOjE3NDYxMzA5MTUsImV4cCI6MTc0NjEzMDk3NX0.sCVuycQv43zth19KiO_CaanBN3jkIBvN94E2ZeJ3nFI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/provider/slot/:slotId",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"provider",
+								"slot",
+								":slotId"
+							],
+							"variable": [
+								{
+									"key": "slotId",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "user",
+			"item": [
+				{
+					"name": "Create Appointment",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxMTkwNmM0Yy1jMGNkLTRhODktYWIzNS03MTAyMjU2NTlmNjciLCJyb2xlIjoicHJvdmlkZXIiLCJpYXQiOjE3NDYxMzA5MTUsImV4cCI6MTc0NjEzMDk3NX0.sCVuycQv43zth19KiO_CaanBN3jkIBvN94E2ZeJ3nFI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"startTime\": \"2025-06-01T09:00:00Z\",\r\n  \"endTime\": \"2025-06-01T09:30:00Z\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/provider/slot",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"provider",
+								"slot"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Slot Available",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxMTkwNmM0Yy1jMGNkLTRhODktYWIzNS03MTAyMjU2NTlmNjciLCJyb2xlIjoicHJvdmlkZXIiLCJpYXQiOjE3NDYxMzE0NDEsImV4cCI6MTc0NjEzMTk0MX0.CvsD45CC5FMJ4oykldzEkphr8MRWprnXaDWIspAh4RI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/provider/slot?isBookedOnly=false",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"provider",
+								"slot"
+							],
+							"query": [
+								{
+									"key": "isBookedOnly",
+									"value": "false"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Appointment",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxMTkwNmM0Yy1jMGNkLTRhODktYWIzNS03MTAyMjU2NTlmNjciLCJyb2xlIjoicHJvdmlkZXIiLCJpYXQiOjE3NDYxMzA5MTUsImV4cCI6MTc0NjEzMDk3NX0.sCVuycQv43zth19KiO_CaanBN3jkIBvN94E2ZeJ3nFI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/provider/slot/:slotId",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"provider",
+								"slot",
+								":slotId"
+							],
+							"variable": [
+								{
+									"key": "slotId",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "Signup",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Karim\",\r\n    \"email\": \"karim@gmail.com\",\r\n    \"password\": \"karim@123\",\r\n    \"role\":\"providers\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/auth/signup",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"auth",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"karim@gmail.com\",\r\n    \"password\": \"karim@123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Refresh",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"refreshToken\":\"d84785d0-664b-457e-9fd3-a9ea24124009\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/auth/refresh",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"auth",
+								"refresh"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "HelloWorld",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000"
+				}
+			},
+			"response": []
+		}
+	]
+}
