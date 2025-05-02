@@ -9,12 +9,7 @@ import {
 } from 'typeorm';
 import { User } from './user.entity';
 import { TimeSlot } from './time-slot.entity';
-
-export enum AppointmentStatus {
-  BOOKED = 'booked',
-  CANCELLED = 'cancelled',
-  COMPLETED = 'completed',
-}
+import { AppointmentStatus } from '../enums/appointment-status';
 
 @Entity('appointments')
 export class Appointment {

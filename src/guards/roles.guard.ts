@@ -6,6 +6,7 @@ import {
 } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
 import { ROLES_KEY } from 'src/common/decorators/roles.decorator';
+import { ErrorMessages } from 'src/common/enums/error-messages.enum';
 import { Roles } from 'src/common/enums/roles.enum';
 
 @Injectable()
@@ -22,13 +23,9 @@ export class RolesGuard implements CanActivate {
 
     const request = context.switchToHttp().getRequest();
     const userRole = request.role;
-    console.log('GGG', request.role);
-    console.log('GGG', !userRole);
-    console.log('GGG', !requiredRoles.includes(userRole));
-    console.log('GGG', requiredRoles);
 
     if (!userRole || !requiredRoles.includes(userRole)) {
-      throw new ForbiddenException('Access denied for your role');
+      throw new ForbiddenException(ErrorMessages.ACCESS_DENIED);
     }
 
     return true;

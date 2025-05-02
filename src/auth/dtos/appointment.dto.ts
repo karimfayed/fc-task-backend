@@ -1,6 +1,5 @@
-// dtos/create-appointment.dto.ts
 import { IsEnum, IsUUID, IsOptional } from 'class-validator';
-import { AppointmentStatus } from 'src/common/entities/appointment.entity';
+import { AppointmentStatus } from 'src/common/enums/appointment-status';
 
 export class AppointmentDto {
   @IsUUID()

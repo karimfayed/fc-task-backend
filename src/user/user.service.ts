@@ -9,6 +9,7 @@ import { AppointmentDto } from 'src/auth/dtos/appointment.dto';
 import { Appointment } from 'src/common/entities/appointment.entity';
 import { TimeSlot } from 'src/common/entities/time-slot.entity';
 import { User } from 'src/common/entities/user.entity';
+import { ErrorMessages } from 'src/common/enums/error-messages.enum';
 import { FindOptionsWhere, MoreThan, Repository } from 'typeorm';
 
 @Injectable()
@@ -40,16 +41,16 @@ export class UserService {
 
   createAppoitment = async (dto: AppointmentDto, userId: string) => {
     const user = await this.userRepo.findOne({ where: { id: userId } });
-    if (!user) throw new NotFoundException('User not found');
+    if (!user) throw new NotFoundException(ErrorMessages.USER_NOT_FOUND);
 
     const slot = await this.slotRepo.findOne({
       where: { id: dto.slotId },
     });
 
-    if (!slot) throw new NotFoundException('Time slot not found');
+    if (!slot) throw new NotFoundException(ErrorMessages.SLOT_NOT_FOUND);
 
     if (slot.isBooked) {
-      throw new BadRequestException('This slot is already booked');
+      throw new BadRequestException(ErrorMessages.SLOT_ALREADY_BOOKED);
     }
 
     const appointment = this.appointmentRepo.create({
@@ -70,14 +71,13 @@ export class UserService {
     });
 
     if (!appointment) {
-      throw new NotFoundException('Appointment not found');
+      throw new NotFoundException(ErrorMessages.APPOINTMENT_NOT_FOUND);
     }
 
     if (appointment.user.id !== userId) {
-      throw new ForbiddenException('You can only delete your own appointments');
+      throw new ForbiddenException(ErrorMessages.INVALID_APPOINTMENT_OWNERSHIP);
     }
 
-    // Unmark the slot as booked
     if (appointment.slot) {
       appointment.slot.isBooked = false;
       await this.slotRepo.save(appointment.slot);

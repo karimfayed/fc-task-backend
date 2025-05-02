@@ -11,7 +11,7 @@ import { User } from './user.entity';
 import { Appointment } from './appointment.entity';
 
 @Entity('time_slots')
-@Unique(['provider', 'startTime', 'endTime']) // prevent overlapping slots
+@Unique(['provider', 'startTime', 'endTime'])
 export class TimeSlot {
   @PrimaryGeneratedColumn('uuid')
   id: string;

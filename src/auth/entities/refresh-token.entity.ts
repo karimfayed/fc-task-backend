@@ -12,7 +12,7 @@ import { Roles } from 'src/common/enums/roles.enum';
 import { User } from 'src/common/entities/user.entity';
 
 @Entity('refresh_tokens')
-@Unique(['user']) // ensures only one token per user
+@Unique(['user'])
 export class RefreshToken {
   @PrimaryGeneratedColumn('uuid')
   id: string;

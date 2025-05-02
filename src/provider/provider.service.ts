@@ -8,6 +8,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { SlotDto } from 'src/auth/dtos/slot.dto';
 import { TimeSlot } from 'src/common/entities/time-slot.entity';
 import { User } from 'src/common/entities/user.entity';
+import { ErrorMessages } from 'src/common/enums/error-messages.enum';
 import { FindOptionsWhere, Repository } from 'typeorm';
 
 @Injectable()
@@ -37,7 +38,7 @@ export class ProviderService {
     const end = new Date(dto.endTime);
 
     if (start >= end) {
-      throw new BadRequestException('End time must be after start time');
+      throw new BadRequestException(ErrorMessages.INVALID_SLOT_END_TIME);
     }
 
     const provider = await this.userRepo.findOne({
@@ -45,7 +46,7 @@ export class ProviderService {
     });
 
     if (!provider) {
-      throw new BadRequestException('Provider not found');
+      throw new BadRequestException(ErrorMessages.PROVIDER_NOT_FOUND);
     }
 
     const slot = this.slotRepo.create({
@@ -62,7 +63,7 @@ export class ProviderService {
     const end = new Date(dto.endTime);
 
     if (start >= end) {
-      throw new BadRequestException('End time must be after start time');
+      throw new BadRequestException(ErrorMessages.INVALID_SLOT_END_TIME);
     }
 
     const slot = await this.slotRepo.findOne({
@@ -70,13 +71,11 @@ export class ProviderService {
     });
 
     if (!slot) {
-      throw new NotFoundException('Slot not found');
+      throw new NotFoundException(ErrorMessages.SLOT_NOT_FOUND);
     }
-    console.log('slot.provider', slot.provider);
-    console.log('providerId', providerId);
 
     if (slot.provider.id !== providerId) {
-      throw new ForbiddenException('You can only update your own slots');
+      throw new ForbiddenException(ErrorMessages.INVALID_SLOT_OWNERSHIP);
     }
 
     slot.startTime = start;
@@ -94,7 +93,7 @@ export class ProviderService {
     });
 
     if (!slot) {
-      throw new NotFoundException('Slot not found or access denied');
+      throw new NotFoundException(ErrorMessages.SLOT_NOT_FOUND);
     }
 
     await this.slotRepo.remove(slot);

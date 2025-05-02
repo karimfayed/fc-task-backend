@@ -74,13 +74,10 @@ export class AuthService {
       },
     });
 
-    console.log('Token ENtity', tokenEntity);
-
     if (!tokenEntity) {
       throw new UnauthorizedException(ErrorMessages.INVALID_REFRESH_TOKEN);
     }
 
-    // Delete the used refresh token
     await this.refreshTokenRepo.remove(tokenEntity);
 
     return this.generateUserTokens(tokenEntity.user.id, tokenEntity.role);
@@ -98,7 +95,6 @@ export class AuthService {
       accessToken,
       refreshToken,
     };
-    // return this.jwtService.sign({ userId: 'abc', role: 'user' }, { secret: '123', expiresIn: '1m' });
   }
 
   async storeRefreshToken(token: string, userId: string, role: Roles) {
